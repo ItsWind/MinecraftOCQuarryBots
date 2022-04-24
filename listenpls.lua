@@ -143,6 +143,7 @@ local validFuncs = {
         end
         os.sleep(0)
       until(numMined >= magicNumber)
+      if keyToPerform ~= "minequarry" then break end
       rowsMined = rowsMined+1
       eve.quarryTurn(useLeft)
       if rowsMined < magicNumber then
