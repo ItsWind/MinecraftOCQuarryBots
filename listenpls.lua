@@ -116,22 +116,22 @@ local validFuncs = {
         if checkInvFull() or checkLowPower() then os.sleep(0) break end
         local blockBelow = geolyzer.analyze(0)
         local blockBelowName = blockBelow["name"]
-		if blockBelowName ~= "minecraft:bedrock" then
-			local blockBelowIsLiquid = blockBelow["harvestLevel"] == -1
-			if blockBelowName == "minecraft:air" then
-			  robot.placeDown()
-			elseif blockBelowName == "minecraft:dirt" or blockBelowName == "minecraft:gravel" then
-			  robot.swingDown()
-			  robot.placeDown()
-			elseif blockBelowIsLiquid then
-			  robot.select(2)
-			  robot.placeDown()
-			  robot.swingDown()
-			  robot.select(1)
-			  robot.placeDown()
-			end
-			robot.swingDown()
-		end
+        if blockBelowName ~= "minecraft:bedrock" then
+            local blockBelowIsLiquid = blockBelow["harvestLevel"] == -1
+            if blockBelowName == "minecraft:air" then
+              robot.placeDown()
+            elseif blockBelowName == "minecraft:dirt" or blockBelowName == "minecraft:gravel" then
+              robot.swingDown()
+              robot.placeDown()
+            elseif blockBelowIsLiquid then
+              robot.select(2)
+              robot.placeDown()
+              robot.swingDown()
+              robot.select(1)
+              robot.placeDown()
+            end
+            robot.swingDown()
+        end
         numMined = numMined+1
         if numMined < magicNumber then
           eve.multipleMove(robot.forward, 3, true)
