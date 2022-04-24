@@ -151,7 +151,7 @@ local validFuncs = {
         useLeft = not useLeft
       else
         local currX, currY, currZ = component.navigation.getPosition()
-        if currY > eve.getConfig("minYLevel")-1 then
+        if currY > eve.getConfig("minYLevel")+1 then
           eve.quarryTurn(useLeft)
           eve.multipleMove(robot.down, 1)
           rowsMined = 0
