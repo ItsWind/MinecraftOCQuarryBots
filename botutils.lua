@@ -3,23 +3,7 @@ local computer = require("computer")
 local robot = require("robot")
 local component = require("component")
 
-local configVars = {
-  ["listenPort"] = ,
-  ["lowPowerPercent"] = 0.1,
-  ["magicNumber"] = 20,
-  ["maxYLevel"] = 51,
-  ["minYLevel"] = 5,
-  ["posStorage"] = {
-    ["x"] = 5.5,
-    ["y"] = 51.5,
-    ["z"] = 14.5
-  },
-  ["posCharging"] = {
-    ["x"] = -1.5,
-    ["y"] = 54.5,
-    ["z"] = 16.5
-  }
-}
+local configVars = require("config")
 function eve.getConfig(str)
   return configVars[str]
 end
