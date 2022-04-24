@@ -70,6 +70,7 @@ function eve.gotoPoint(posT, yFirst, adjustYLevelAtStart)
     if adjustYLevelAtStart and currPosY > maxYLevel then
         local ylev = currPosY
         while ylev > maxYLevel do
+            robot.swingDown()
             if robot.down() then
                 ylev = ylev-1
                 currPosY = currPosY-1
