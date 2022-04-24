@@ -8,6 +8,7 @@ local invController = component.inventory_controller
 local geolyzer = component.geolyzer
 
 local keyToPerform = "stop"
+local finishedQuarry = false
 
 local savedPositions = {
   ["storage"] = eve.getConfig("posStorage"),
@@ -75,6 +76,7 @@ local validFuncs = {
     if savedPositions["quarry"] ~= nil and savedPositions["quarry"]["y"] == nil then savedPositions["quarry"]["y"] = y end
     while keyToPerform == "gotocharging" do
       if eve.gotoPoint(savedPositions["charging"], false) then
+        if finishedQuarry then os.exit() end
         if eve.getPowerPercent() >= 0.995 then
           eve.multipleMove(robot.down, 4)
           if not checkInvFull(math.floor(robot.inventorySize()/2)) then
@@ -156,6 +158,7 @@ local validFuncs = {
           savedPositions["quarry"] = nil
           keyToPerform = "gotocharging"
           eve.say("Y5 REACHED: Going back to charging station.")
+          finishedQuarry = true
         end
       end
     end
