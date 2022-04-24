@@ -4,7 +4,6 @@ local computer = require("computer")
 local event = require("event")
 local component = require("component")
 
--- YEET THIS SHIT WORKING
 local invController = component.inventory_controller
 local geolyzer = component.geolyzer
 
