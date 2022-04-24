@@ -60,20 +60,23 @@ local validFuncs = {
     end
   end,
   ["gotostorage"] = function()
+    local ylevadj = true
     local x, y, z = component.navigation.getPosition()
     if savedPositions["quarry"] ~= nil and savedPositions["quarry"]["y"] == nil then savedPositions["quarry"]["y"] = y end
     while keyToPerform == "gotostorage" do
-      if eve.gotoPoint(savedPositions["storage"], false) then
+      if eve.gotoPoint(savedPositions["storage"], false, ylevadj) then
         keyToPerform = "unloadall"
       end
+      ylevadj = false
       os.sleep(0)
     end
   end,
   ["gotocharging"] = function()
+    local ylevadj = true
     local x, y, z = component.navigation.getPosition()
     if savedPositions["quarry"] ~= nil and savedPositions["quarry"]["y"] == nil then savedPositions["quarry"]["y"] = y end
     while keyToPerform == "gotocharging" do
-      if eve.gotoPoint(savedPositions["charging"], false) then
+      if eve.gotoPoint(savedPositions["charging"], false, ylevadj) then
         if eve.getPowerPercent() >= 0.995 then
           if not checkInvFull(math.floor(robot.inventorySize()/2)) then
             if eve.savedPosValid(savedPositions["quarry"]) then
@@ -85,16 +88,19 @@ local validFuncs = {
         end
         os.sleep(5)
       end
+      ylevadj = false
       os.sleep(0)
     end
   end,
   ["gotoquarry"] = function()
     if eve.savedPosValid(savedPositions["quarry"]) then
+      local ylevadj = true
       while keyToPerform == "gotoquarry" do
-        if eve.gotoPoint(savedPositions["quarry"], true) then
+        if eve.gotoPoint(savedPositions["quarry"], true, ylevadj) then
           keyToPerform = "minequarry"
           eve.say("I'm performing minequarry")
         end
+        ylevadj = false
         os.sleep(0)
       end
     else
