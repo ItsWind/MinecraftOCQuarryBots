@@ -62,21 +62,9 @@ local function moveY(up)
     robot.down()
   end
 end
-local maxYLevel = eve.getConfig("maxYLevel")
-function eve.gotoPoint(posT, yFirst, adjustYLevelAtStart)
-  adjustYLevelAtStart = adjustYLevelAtStart or false
+function eve.gotoPoint(posT, yFirst)
   if eve.savedPosValid(posT) then
     local currPosX, currPosY, currPosZ = component.navigation.getPosition()
-    if adjustYLevelAtStart and currPosY > maxYLevel then
-        local ylev = currPosY
-        while ylev > maxYLevel do
-            robot.swingDown()
-            if robot.down() then
-                ylev = ylev-1
-                currPosY = currPosY-1
-            end
-        end
-    end
     local relX, relY, relZ = posT["x"]-currPosX, posT["y"]-currPosY, posT["z"]-currPosZ
     if relY ~= 0 and yFirst then moveY(relY>0)
     elseif relX > 0 then moveXZ(5)
@@ -86,7 +74,6 @@ function eve.gotoPoint(posT, yFirst, adjustYLevelAtStart)
     elseif relY ~= 0 and not yFirst then moveY(relY>0)
     else
       if posT["facingNum"] ~= nil then eve.faceNum(posT["facingNum"]) end
-      adjustedYLevel = false
       return true
     end
   else
