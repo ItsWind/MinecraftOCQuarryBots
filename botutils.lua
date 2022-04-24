@@ -7,6 +7,8 @@ local configVars = {
   ["listenPort"] = ,
   ["lowPowerPercent"] = 0.1,
   ["magicNumber"] = 20,
+  ["maxYLevel"] = 51,
+  ["minYLevel"] = 5,
   ["posStorage"] = {
     ["x"] = 5.5,
     ["y"] = 51.5,
@@ -76,7 +78,7 @@ local function moveY(up)
     robot.down()
   end
 end
-local maxYLevel = 51
+local maxYLevel = eve.getConfig("maxYLevel")
 function eve.gotoPoint(posT, yFirst)
   if eve.savedPosValid(posT) then
     local currPosX, currPosY, currPosZ = component.navigation.getPosition()
