@@ -49,16 +49,19 @@ local function moveXZ(facingNumNeeded)
   if component.navigation.getFacing() ~= facingNumNeeded then
     robot.turnRight()
   else
-    robot.swing()
+    local blockMoveToName = component.geolyzer.analyze(3)["name"]
+    if blockMoveToName ~= "OpenComputers:robot" then robot.swing() end
     robot.forward()
   end
 end
 local function moveY(up)
   if up then
-    robot.swingUp()
+    local blockMoveToName = component.geolyzer.analyze(1)["name"]
+    if blockMoveToName ~= "OpenComputers:robot" then robot.swingUp() end
     robot.up()
   else
-    robot.swingDown()
+    local blockMoveToName = component.geolyzer.analyze(0)["name"]
+    if blockMoveToName ~= "OpenComputers:robot" then robot.swingDown() end
     robot.down()
   end
 end
