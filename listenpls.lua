@@ -52,7 +52,7 @@ local validFuncs = {
       robot.dropUp()
     end
     robot.select(1)
-    eve.multipleMove(robot.down, 1)
+    eve.multipleMove(robot.down, math.random(1, 6))
     if not checkLowPower(eve.getConfig("lowPowerPercent")) then
       if eve.savedPosValid(savedPositions["quarry"]) then
         keyToPerform = "gotoquarry"
@@ -78,7 +78,7 @@ local validFuncs = {
       if eve.gotoPoint(savedPositions["charging"], false) then
         if finishedQuarry then os.exit() end
         if eve.getPowerPercent() >= 0.995 then
-          eve.multipleMove(robot.down, 4)
+          eve.multipleMove(robot.down, math.random(4, 9))
           if not checkInvFull(math.floor(robot.inventorySize()/2)) then
             if eve.savedPosValid(savedPositions["quarry"]) then
               keyToPerform = "gotoquarry"
